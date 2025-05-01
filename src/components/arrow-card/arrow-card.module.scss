@@ -1,0 +1,80 @@
+@import "@/styles/variables";
+
+.card {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  position: relative;
+  border: 0;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.1s ease-in-out;
+
+  .card-body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.3rem 1rem;
+  }
+
+  .card-info {
+    position: absolute;
+    bottom: -7px;
+    border-radius: 14px;
+    padding: 0px 8px;
+    left: 50%;
+    color: #fff;
+    transform: translateX(-50%);
+    background-color: $color-secondary;
+  }
+
+  &:hover {
+    background-color: $color-primary;
+  }
+
+  &:active {
+    background-color: $color-secondary;
+  }
+}
+
+.arrow-left {
+  width: 0;
+  height: 0;
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent;
+  border-right: 100px solid #666;
+}
+
+.arrow-right {
+  width: 0;
+  height: 0;
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent;
+  border-left: 100px solid #666;
+}
+
+.arrow-top {
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 100px solid #666;
+}
+
+.arrow-bottom {
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 100px solid #666;
+}
+
+.arrow-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
