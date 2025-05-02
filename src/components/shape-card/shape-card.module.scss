@@ -1,5 +1,7 @@
 @import "@/styles/variables";
 
+$shape-color: #7e7e7e;
+
 .card {
   display: flex;
   flex: 1;
@@ -7,6 +9,8 @@
   position: relative;
   border: 0;
   background-color: #fff;
+  height: 100%;
+  min-height: 141.59px;
   cursor: pointer;
   border-radius: 8px;
   transition: all 0.1s ease-in-out;
@@ -40,41 +44,81 @@
   }
 }
 
-.arrow-left {
+.shape-left {
   width: 0;
   height: 0;
   border-top: 50px solid transparent;
   border-bottom: 50px solid transparent;
-  border-right: 100px solid #666;
+  border-right: 100px solid $shape-color;
 }
 
-.arrow-right {
+.shape-right {
   width: 0;
   height: 0;
   border-top: 50px solid transparent;
   border-bottom: 50px solid transparent;
-  border-left: 100px solid #666;
+  border-left: 100px solid $shape-color;
 }
 
-.arrow-top {
+.shape-top {
   width: 0;
   height: 0;
   border-left: 50px solid transparent;
   border-right: 50px solid transparent;
-  border-bottom: 100px solid #666;
+  border-bottom: 100px solid $shape-color;
 }
 
-.arrow-bottom {
+.shape-bottom {
   width: 0;
   height: 0;
   border-left: 50px solid transparent;
   border-right: 50px solid transparent;
-  border-top: 100px solid #666;
+  border-top: 100px solid $shape-color;
 }
 
-.arrow-wrapper {
+.shape-wrapper {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.shape-square {
+  width: 100px;
+  height: 100px;
+  background-color: $shape-color;
+}
+
+.shape-rectangle {
+  width: 90%;
+  height: 100px;
+  background-color: $shape-color;
+}
+
+.shape-circle {
+  width: 100px;
+  height: 100px;
+  background-color: $shape-color;
+  border-radius: 50%;
+}
+
+.shape-ellipse {
+  width: 80%;
+  height: 100px;
+  background-color: $shape-color;
+  border-radius: 50%;
+}
+
+.shape-parallelogram {
+  width: 80%;
+  height: 100px;
+  background-color: $shape-color;
+  transform: skew(20deg);
+}
+
+.shape-trapezoid {
+  width: 80%;
+  height: 100px;
+  background-color: $shape-color;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
 }

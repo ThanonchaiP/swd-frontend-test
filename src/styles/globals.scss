@@ -20,3 +20,19 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+@for $i from 1 through 10 {
+  .m-#{$i} {
+    margin: #{$i}rem;
+  }
+  .mt-#{$i} {
+    margin-top: #{$i}rem;
+  }
+  .mb-#{$i} {
+    margin-bottom: #{$i}rem;
+  }
+}
