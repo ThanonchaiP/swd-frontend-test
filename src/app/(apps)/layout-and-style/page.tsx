@@ -1,6 +1,6 @@
 "use client";
 
-import { Col, Flex, Row, Typography } from "antd";
+import { Col, Flex, Row, RowProps, Typography } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -9,45 +9,50 @@ import { ShapeType } from "@/types";
 
 import styles from "./page.module.scss";
 
-const SHAPE_LIST = [
+const SHAPE_LIST: ShapeType[] = [
   "square",
   "circle",
   "ellipse",
   "trapezoid",
   "rectangle",
   "parallelogram",
-] as ShapeType[];
+];
 
 export default function LayoutAndStyle() {
   const { t } = useTranslation();
 
-  const [data, setData] = useState<ShapeType[]>(SHAPE_LIST);
   const [toggle, setToggle] = useState(false);
+  const [data, setData] = useState<ShapeType[]>(SHAPE_LIST);
+
+  const rowProps: RowProps = {
+    gutter: [16, 16],
+    justify: "end",
+    className: "mt-1",
+  };
 
   const moveShape = (direction: "left" | "right") => {
-    setData((prev) => {
-      if (direction === "left") {
-        const [first, ...rest] = prev;
-        return [...rest, first];
-      } else {
-        const last = prev[prev.length - 1];
-        return [last, ...prev.slice(0, -1)];
-      }
-    });
+    setData((prev) =>
+      direction === "left"
+        ? [...prev.slice(1), prev[0]]
+        : [prev[prev.length - 1], ...prev.slice(0, -1)]
+    );
   };
 
-  const randomShape = () => {
-    const newData = [...data];
-    for (let i = data.length - 1; i > 0; i--) {
+  const shuffleShapes = () => {
+    const shuffled = [...data];
+    for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [newData[i], newData[j]] = [newData[j], newData[i]];
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
-    setData(newData);
+    setData(shuffled);
   };
 
-  const movePosition = () => {
-    setToggle((prev) => !prev);
-  };
+  const renderShapeCards = (shapes: ShapeType[]) =>
+    shapes.map((shape) => (
+      <Col span={6} key={shape}>
+        <ShapeCard type={shape} onClick={shuffleShapes} />
+      </Col>
+    ));
 
   return (
     <Flex vertical gap={16}>
@@ -64,11 +69,11 @@ export default function LayoutAndStyle() {
           </Col>
 
           <Col span={12}>
-            <Flex>
+            <Flex justify="center">
               <ShapeCard
                 type="top-bottom"
                 label="Move position"
-                onClick={movePosition}
+                onClick={() => setToggle((prev) => !prev)}
               />
             </Flex>
           </Col>
@@ -82,21 +87,13 @@ export default function LayoutAndStyle() {
           </Col>
         </Row>
 
-        <Row gutter={[16, 16]} justify="end" className="mt-1">
-          {data.slice(0, 3).map((shape) => (
-            <Col span={6} key={shape}>
-              <ShapeCard type={shape} onClick={randomShape} />
-            </Col>
-          ))}
+        <Row {...rowProps}>
+          {renderShapeCards(data.slice(0, 3))}
           {toggle && <Col span={3} />}
         </Row>
 
-        <Row gutter={[16, 16]} justify="end" className="mt-1">
-          {data.slice(3, data.length).map((shape) => (
-            <Col span={6} key={shape}>
-              <ShapeCard type={shape} onClick={randomShape} />
-            </Col>
-          ))}
+        <Row {...rowProps}>
+          {renderShapeCards(data.slice(3))}
           {!toggle && <Col span={3} />}
         </Row>
       </div>
