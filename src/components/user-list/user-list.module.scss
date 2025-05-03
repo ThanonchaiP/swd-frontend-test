@@ -1,0 +1,14 @@
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+.action-color {
+  color: #000 !important;
+
+  &:hover {
+    color: #1677ff !important;
+  }
+}

@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { Dayjs } from "dayjs";
+
 export type ShapeType =
   | "square"
   | "circle"
@@ -10,7 +13,7 @@ export type ShapeType =
   | "top-bottom";
 
 export type User = {
-  id?: string;
+  id: string;
   title: string;
   firstname: string;
   lastname: string;
@@ -21,4 +24,8 @@ export type User = {
   phone: string;
   passport?: string;
   expectedSalary: string;
+};
+
+export type UserFormValues = User & {
+  birthday: Dayjs | any;
 };

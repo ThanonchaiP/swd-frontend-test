@@ -1,5 +1,6 @@
 import { Button, Col, DatePicker, Form, Input, Radio, Row, Select } from "antd";
 import type { RuleObject } from "antd/es/form";
+import dayjs from "dayjs";
 import { useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "@/store/configureStore";
@@ -8,15 +9,15 @@ import {
   clearSelectedUser,
   selectSelectedUser,
   updateUser,
-} from "@/store/slices/formSlice";
-import { User } from "@/types";
+} from "@/store/slices/userSlice";
+import { UserFormValues } from "@/types";
 
 import { CitizenInput } from "./citizen-Input";
 import { MobilePhoneInput } from "./mobile-phone-input";
 import styles from "./user-form.module.scss";
 
 export const UserForm = () => {
-  const [form] = Form.useForm<User>();
+  const [form] = Form.useForm<UserFormValues>();
 
   const dispatch = useAppDispatch();
   const selectedUser = useAppSelector(selectSelectedUser);
@@ -26,13 +27,21 @@ export const UserForm = () => {
     message: "This field is required",
   };
 
-  const onFinish = (values: User) => {
+  const onFinish = (values: UserFormValues) => {
+    const { birthday, ...rest } = values;
+
+    const payload = {
+      ...rest,
+      birthday: birthday.format("YYYY/MM/DD"),
+    };
+
     if (selectedUser) {
-      dispatch(updateUser(values));
+      dispatch(updateUser(payload));
     } else {
-      dispatch(createUser(values));
-      form.resetFields();
+      dispatch(createUser(payload));
     }
+
+    form.resetFields();
   };
 
   const validateCitizenID = (_: RuleObject, value: string) => {
@@ -68,7 +77,11 @@ export const UserForm = () => {
 
   useEffect(() => {
     if (!selectedUser) return;
-    form.setFieldsValue(selectedUser);
+
+    form.setFieldsValue({
+      ...selectedUser,
+      birthday: dayjs(selectedUser.birthday),
+    });
   }, [form, selectedUser]);
 
   return (
