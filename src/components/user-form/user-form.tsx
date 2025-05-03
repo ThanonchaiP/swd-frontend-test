@@ -1,6 +1,14 @@
 import { Button, Col, DatePicker, Form, Input, Radio, Row, Select } from "antd";
 import type { RuleObject } from "antd/es/form";
+import { useEffect } from "react";
 
+import { useAppDispatch, useAppSelector } from "@/store/configureStore";
+import {
+  createUser,
+  clearSelectedUser,
+  selectSelectedUser,
+  updateUser,
+} from "@/store/slices/formSlice";
 import { User } from "@/types";
 
 import { CitizenInput } from "./citizen-Input";
@@ -10,13 +18,21 @@ import styles from "./user-form.module.scss";
 export const UserForm = () => {
   const [form] = Form.useForm<User>();
 
+  const dispatch = useAppDispatch();
+  const selectedUser = useAppSelector(selectSelectedUser);
+
   const required = {
     required: true,
     message: "This field is required",
   };
 
   const onFinish = (values: User) => {
-    console.log("Success:", values);
+    if (selectedUser) {
+      dispatch(updateUser(values));
+    } else {
+      dispatch(createUser(values));
+      form.resetFields();
+    }
   };
 
   const validateCitizenID = (_: RuleObject, value: string) => {
@@ -47,7 +63,13 @@ export const UserForm = () => {
 
   const resetFields = () => {
     form.resetFields();
+    dispatch(clearSelectedUser());
   };
+
+  useEffect(() => {
+    if (!selectedUser) return;
+    form.setFieldsValue(selectedUser);
+  }, [form, selectedUser]);
 
   return (
     <Form form={form} onFinish={onFinish} className={styles["form-wrapper"]}>

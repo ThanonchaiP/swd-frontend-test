@@ -10,6 +10,7 @@ export type ShapeType =
   | "top-bottom";
 
 export type User = {
+  id?: string;
   title: string;
   firstname: string;
   lastname: string;
