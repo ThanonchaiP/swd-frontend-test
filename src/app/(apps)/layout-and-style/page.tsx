@@ -63,7 +63,7 @@ export default function LayoutAndStyle() {
           <Col span={6}>
             <ShapeCard
               type="left"
-              label="Move shape"
+              label={t("moveShape")}
               onClick={() => moveShape("left")}
             />
           </Col>
@@ -72,7 +72,7 @@ export default function LayoutAndStyle() {
             <Flex justify="center">
               <ShapeCard
                 type="top-bottom"
-                label="Move position"
+                label={t("movePosition")}
                 onClick={() => setToggle((prev) => !prev)}
               />
             </Flex>
@@ -81,7 +81,7 @@ export default function LayoutAndStyle() {
           <Col span={6}>
             <ShapeCard
               type="right"
-              label="Move shape"
+              label={t("moveShape")}
               onClick={() => moveShape("right")}
             />
           </Col>
