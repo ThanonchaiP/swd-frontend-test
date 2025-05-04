@@ -40,6 +40,7 @@ const userSlice = createSlice({
 
       alert(t("updateSuccess"));
       state.users = newUsers;
+      state.selected = undefined;
     },
     removeAllUser(state) {
       userService.removeAll();
