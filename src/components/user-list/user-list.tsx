@@ -46,6 +46,7 @@ export const UserList = () => {
     {
       title: t("name"),
       key: "name",
+      sorter: (a, b) => a.firstname.localeCompare(b.firstname),
       render: (_, record) => (
         <Typography.Text>
           {record.firstname} {record.lastname}
@@ -56,18 +57,21 @@ export const UserList = () => {
       title: t("gender"),
       dataIndex: "gender",
       key: "gender",
+      sorter: (a, b) => a.gender.localeCompare(b.gender),
       render: (gender: string) => t(gender),
     },
     {
       title: t("mobilePhone"),
       dataIndex: "phone",
       key: "phone",
+      sorter: (a, b) => a.phone.localeCompare(b.phone),
       render: (phone: string) => phone.split("-").join(""),
     },
     {
       title: t("nationality"),
       dataIndex: "nationality",
       key: "nationality",
+      sorter: (a, b) => a.nationality.localeCompare(b.nationality),
       render: (nationality: string) => t(nationality),
     },
     {
