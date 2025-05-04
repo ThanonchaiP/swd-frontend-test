@@ -11,7 +11,7 @@ export default function FormAndTable() {
 
   return (
     <Flex vertical gap={16}>
-      <Typography.Title level={1}>{t("Form & Table")}</Typography.Title>
+      <Typography.Title level={1}>{t("formAndTable")}</Typography.Title>
       <UserForm />
       <UserList />
     </Flex>

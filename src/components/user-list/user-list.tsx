@@ -2,6 +2,7 @@ import type { PaginationProps } from "antd";
 import { Button, Checkbox, Flex, Pagination, Table, Typography } from "antd";
 import type { ColumnsType, TableProps } from "antd/es/table";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { useAppDispatch, useAppSelector } from "@/store/configureStore";
 import {
@@ -22,6 +23,7 @@ type TableRowSelection<T extends object = object> =
   TableProps<T>["rowSelection"];
 
 export const UserList = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const users = useAppSelector(selectUsers);
 
@@ -42,7 +44,7 @@ export const UserList = () => {
 
   const columns: ColumnsType<User> = [
     {
-      title: "Name",
+      title: t("name"),
       key: "name",
       render: (_, record) => (
         <Typography.Text>
@@ -51,23 +53,25 @@ export const UserList = () => {
       ),
     },
     {
-      title: "Gender",
+      title: t("gender"),
       dataIndex: "gender",
       key: "gender",
+      render: (gender: string) => t(gender),
     },
     {
-      title: "Mobile Phone",
+      title: t("mobilePhone"),
       dataIndex: "phone",
       key: "phone",
       render: (phone: string) => phone.split("-").join(""),
     },
     {
-      title: "Nationality",
+      title: t("nationality"),
       dataIndex: "nationality",
       key: "nationality",
+      render: (nationality: string) => t(nationality),
     },
     {
-      title: "MANAGE",
+      title: t("manage"),
       key: "manage",
       render: (_, record) => (
         <Flex gap={8}>
@@ -75,13 +79,13 @@ export const UserList = () => {
             className={styles["action-color"]}
             onClick={() => onEdit(record)}
           >
-            EDIT
+            {t("edit")}
           </Typography.Link>
           <Typography.Link
             className={styles["action-color"]}
             onClick={() => deleteUser(record.id)}
           >
-            DELETE
+            {t("delete")}
           </Typography.Link>
         </Flex>
       ),
@@ -93,8 +97,8 @@ export const UserList = () => {
     type,
     originalElement
   ) => {
-    if (type === "prev") return <a>PREV</a>;
-    if (type === "next") return <a>NEXT</a>;
+    if (type === "prev") return <a>{t("prev")}</a>;
+    if (type === "next") return <a>{t("next")}</a>;
     return originalElement;
   };
 
@@ -144,16 +148,16 @@ export const UserList = () => {
           }
           onChange={({ target }) => onSelectAll(target.checked)}
         >
-          Select All
+          {t("selectAll")}
         </Checkbox>
         <Button
           onClick={deleteSelectedUsers}
           disabled={selectedRowKeys.length === 0}
         >
-          DELETE
+          {t("delete")}
         </Button>
         <Button type="primary" onClick={initialMockData}>
-          MOCK DATA
+          {t("mockData")}
         </Button>
       </Flex>
 

@@ -44,15 +44,10 @@ export const MobilePhoneInput: React.FC<MobilePhoneInputProps> = ({
             </Flex>
           ),
         }))}
-        placeholder="Country"
         style={{ width: 120 }}
       />
       <span>-</span>
-      <Input
-        value={phoneNumber}
-        onChange={handlePhoneNumberChange}
-        placeholder="Phone Number"
-      />
+      <Input value={phoneNumber} onChange={handlePhoneNumberChange} />
     </Flex>
   );
 };

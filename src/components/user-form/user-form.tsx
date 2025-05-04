@@ -2,6 +2,7 @@ import { Button, Col, DatePicker, Form, Input, Radio, Row, Select } from "antd";
 import type { RuleObject } from "antd/es/form";
 import dayjs from "dayjs";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 import { useAppDispatch, useAppSelector } from "@/store/configureStore";
 import {
@@ -17,6 +18,7 @@ import { MobilePhoneInput } from "./mobile-phone-input";
 import styles from "./user-form.module.scss";
 
 export const UserForm = () => {
+  const { t } = useTranslation();
   const [form] = Form.useForm<UserFormValues>();
 
   const dispatch = useAppDispatch();
@@ -87,47 +89,51 @@ export const UserForm = () => {
   return (
     <Form form={form} onFinish={onFinish} className={styles["form-wrapper"]}>
       <Row gutter={[12, 0]}>
-        <Col span={4}>
-          <Form.Item label="Title" name="title" rules={[required]}>
+        <Col span={5}>
+          <Form.Item label={t("title")} name="title" rules={[required]}>
             <Select
               options={[
-                { label: "Mr.", value: "mr." },
-                { label: "Mrs.", value: "mrs." },
-                { label: "Ms.", value: "ms." },
+                { label: t("mr"), value: "mr." },
+                { label: t("mrs"), value: "mrs." },
+                { label: t("ms"), value: "ms." },
               ]}
             />
           </Form.Item>
         </Col>
-        <Col span={10}>
-          <Form.Item label="Firstname" name="firstname" rules={[required]}>
+        <Col span={9}>
+          <Form.Item label={t("firstname")} name="firstname" rules={[required]}>
             <Input />
           </Form.Item>
         </Col>
-        <Col span={10}>
-          <Form.Item label="Lastname" name="lastname" rules={[required]}>
+        <Col span={9}>
+          <Form.Item label={t("lastname")} name="lastname" rules={[required]}>
             <Input />
           </Form.Item>
         </Col>
         <Col span={6}>
-          <Form.Item label="Birthday" name="birthday" rules={[required]}>
-            <DatePicker />
+          <Form.Item label={t("birthday")} name="birthday" rules={[required]}>
+            <DatePicker placeholder={t("selectDate")} />
           </Form.Item>
         </Col>
         <Col span={10}>
-          <Form.Item label="Nationality" name="nationality" rules={[required]}>
+          <Form.Item
+            label={t("nationality")}
+            name="nationality"
+            rules={[required]}
+          >
             <Select
               options={[
-                { label: "Thai", value: "thai" },
-                { label: "France", value: "france" },
-                { label: "American", value: "american" },
+                { label: t("thai"), value: "thai" },
+                { label: t("france"), value: "france" },
+                { label: t("american"), value: "american" },
               ]}
-              placeholder="-- Please Select --"
+              placeholder={t("pleaseSelect")}
             />
           </Form.Item>
         </Col>
         <Col span={24}>
           <Form.Item
-            label="CitizenID"
+            label={t("citizenID")}
             name="citizenID"
             rules={[
               {
@@ -140,19 +146,19 @@ export const UserForm = () => {
           </Form.Item>
         </Col>
         <Col span={24}>
-          <Form.Item label="Gender" name="gender" rules={[required]}>
+          <Form.Item label={t("gender")} name="gender" rules={[required]}>
             <Radio.Group
               options={[
-                { label: "Male", value: "male" },
-                { label: "Female", value: "Female" },
-                { label: "Unsex", value: "unsex" },
+                { label: t("male"), value: "male" },
+                { label: t("female"), value: "female" },
+                { label: t("unsex"), value: "unsex" },
               ]}
             />
           </Form.Item>
         </Col>
         <Col span={14}>
           <Form.Item
-            label="Mobie Phone"
+            label={t("mobilePhone")}
             name="phone"
             rules={[
               required,
@@ -166,13 +172,13 @@ export const UserForm = () => {
           </Form.Item>
         </Col>
         <Col span={24}>
-          <Form.Item label="Passport No" name="passport">
+          <Form.Item label={t("passportNo")} name="passport">
             <Input style={{ maxWidth: 286 }} />
           </Form.Item>
         </Col>
         <Col span={14}>
           <Form.Item
-            label="Expected salary"
+            label={t("expectedSalary")}
             name="expectedSalary"
             rules={[required]}
           >
@@ -180,10 +186,10 @@ export const UserForm = () => {
           </Form.Item>
         </Col>
         <Col span={4}>
-          <Button onClick={resetFields}>RESET</Button>
+          <Button onClick={resetFields}>{t("reset")}</Button>
         </Col>
         <Col span={4}>
-          <Button htmlType="submit">SUBMIT</Button>
+          <Button htmlType="submit">{t("submit")}</Button>
         </Col>
       </Row>
     </Form>

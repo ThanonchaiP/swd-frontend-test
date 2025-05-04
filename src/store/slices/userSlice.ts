@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { t } from "i18next";
 
 import { userService } from "@/services/userService";
 import { User } from "@/types";
@@ -25,7 +26,7 @@ const userSlice = createSlice({
     },
     createUser(state, action: PayloadAction<User>) {
       const newUsers = userService.create(action.payload);
-      alert("Save successfully!");
+      alert(t("createSuccess"));
       state.users = newUsers;
     },
     updateUser(state, action: PayloadAction<User>) {
@@ -33,11 +34,11 @@ const userSlice = createSlice({
       const newUsers = userService.update(userId, action.payload);
 
       if (!newUsers) {
-        alert("Update failed!");
+        alert(t("updateFailed"));
         return;
       }
 
-      alert("Update successfully!");
+      alert(t("updateSuccess"));
       state.users = newUsers;
     },
     removeUser(state, action: PayloadAction<string>) {
@@ -45,16 +46,16 @@ const userSlice = createSlice({
       const newUsers = userService.remove(userId);
 
       if (!newUsers) {
-        alert("Delete failed!");
+        alert(t("deleteFailed"));
         return;
       }
 
-      alert("Delete successfully!");
+      alert(t("deleteSuccess"));
       state.users = newUsers;
     },
     removeAllUser(state) {
       userService.removeAll();
-      alert("Delete successfully!");
+      alert(t("deleteSuccess"));
       state.users = [];
     },
     removeByIds(state, action: PayloadAction<string[]>) {
@@ -62,11 +63,11 @@ const userSlice = createSlice({
       const newUsers = userService.removeByIds(userIds);
 
       if (!newUsers) {
-        alert("Delete failed!");
+        alert(t("deleteFailed"));
         return;
       }
 
-      alert("Delete successfully!");
+      alert(t("deleteSuccess"));
       state.users = newUsers;
     },
     setSelectedUser(state, action: PayloadAction<User>) {
@@ -78,7 +79,7 @@ const userSlice = createSlice({
     mockData(state) {
       const users = userService.mockData();
       state.users = users;
-      alert("Mock data successfully!");
+      alert(t("mockDataSuccess"));
     },
   },
 });

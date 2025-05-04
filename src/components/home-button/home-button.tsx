@@ -1,8 +1,10 @@
 import { Button } from "antd";
 import { usePathname, useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 export const HomeButton = () => {
   const router = useRouter();
+  const { t } = useTranslation();
   const pathname = usePathname();
 
   const handleClick = () => {
@@ -18,7 +20,7 @@ export const HomeButton = () => {
       onClick={handleClick}
       style={{ position: "fixed", top: 60, right: 10 }}
     >
-      Home
+      {t("home")}
     </Button>
   );
 };
