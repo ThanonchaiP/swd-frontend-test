@@ -43,4 +43,5 @@ export const translationEn = {
   deleteSuccess: "Delete successfully!",
   deleteFailed: "Delete failed!",
   mockDataSuccess: "Mock data successfully!",
+  requiredMessage: "This field is required",
 };

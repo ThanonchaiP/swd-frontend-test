@@ -26,7 +26,7 @@ export const UserForm = () => {
 
   const required = {
     required: true,
-    message: "This field is required",
+    message: t("requiredMessage"),
   };
 
   const onFinish = (values: UserFormValues) => {

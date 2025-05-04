@@ -43,4 +43,5 @@ export const translationTh = {
   deleteSuccess: "ลบข้อมูลสำเร็จ!",
   deleteFailed: "ลบข้อมูลไม่สำเร็จ!",
   mockDataSuccess: "สร้างข้อมูลตัวอย่างสำเร็จ!",
+  requiredMessage: "กรุณากรอกข้อมูล",
 };
