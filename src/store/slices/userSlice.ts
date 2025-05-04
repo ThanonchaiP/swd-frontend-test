@@ -81,6 +81,9 @@ const userSlice = createSlice({
       state.users = users;
       alert(t("mockDataSuccess"));
     },
+    reset(state) {
+      state.selected = initialState.selected;
+    },
   },
 });
 
@@ -94,6 +97,7 @@ export const {
   removeUser,
   mockData,
   removeByIds,
+  reset,
 } = userSlice.actions;
 
 export const selectUsers = (state: RootState) => state.user.users;
