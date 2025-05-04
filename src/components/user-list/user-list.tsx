@@ -6,10 +6,9 @@ import { useTranslation } from "react-i18next";
 
 import { useAppDispatch, useAppSelector } from "@/store/configureStore";
 import {
-  getUsers,
+  loadUsers,
   mockData,
   removeByIds,
-  removeUser,
   selectUsers,
   setSelectedUser,
 } from "@/store/slices/userSlice";
@@ -31,7 +30,7 @@ export const UserList = () => {
   const [page, setPage] = useState(1);
 
   const deleteUser = (userId: string) => {
-    dispatch(removeUser(userId));
+    dispatch(removeByIds([userId]));
   };
 
   const onEdit = (user: User) => {
@@ -47,11 +46,7 @@ export const UserList = () => {
       title: t("name"),
       key: "name",
       sorter: (a, b) => a.firstname.localeCompare(b.firstname),
-      render: (_, record) => (
-        <Typography.Text>
-          {record.firstname} {record.lastname}
-        </Typography.Text>
-      ),
+      render: (_, record) => `${record.firstname} ${record.lastname}`,
     },
     {
       title: t("gender"),
@@ -140,7 +135,7 @@ export const UserList = () => {
   }, [users]);
 
   useEffect(() => {
-    dispatch(getUsers());
+    dispatch(loadUsers());
   }, [dispatch]);
 
   return (

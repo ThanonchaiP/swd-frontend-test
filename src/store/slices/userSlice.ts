@@ -20,7 +20,7 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    getUsers(state) {
+    loadUsers(state) {
       const users = userService.getAll();
       state.users = users;
     },
@@ -39,18 +39,6 @@ const userSlice = createSlice({
       }
 
       alert(t("updateSuccess"));
-      state.users = newUsers;
-    },
-    removeUser(state, action: PayloadAction<string>) {
-      const userId = action.payload;
-      const newUsers = userService.remove(userId);
-
-      if (!newUsers) {
-        alert(t("deleteFailed"));
-        return;
-      }
-
-      alert(t("deleteSuccess"));
       state.users = newUsers;
     },
     removeAllUser(state) {
@@ -88,13 +76,12 @@ const userSlice = createSlice({
 });
 
 export const {
-  getUsers,
+  loadUsers,
   createUser,
   setSelectedUser,
   clearSelectedUser,
   updateUser,
   removeAllUser,
-  removeUser,
   mockData,
   removeByIds,
   reset,
