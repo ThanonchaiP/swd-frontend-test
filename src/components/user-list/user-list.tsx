@@ -128,8 +128,12 @@ export const UserList = () => {
   };
 
   useEffect(() => {
+    if (users.length <= 10) setPage(1);
+  }, [users]);
+
+  useEffect(() => {
     dispatch(getUsers());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={styles["container"]}>
@@ -142,7 +146,12 @@ export const UserList = () => {
         >
           Select All
         </Checkbox>
-        <Button onClick={deleteSelectedUsers}>DELETE</Button>
+        <Button
+          onClick={deleteSelectedUsers}
+          disabled={selectedRowKeys.length === 0}
+        >
+          DELETE
+        </Button>
         <Button type="primary" onClick={initialMockData}>
           MOCK DATA
         </Button>
@@ -150,6 +159,7 @@ export const UserList = () => {
 
       <Flex justify="flex-end" className="mb-1">
         <Pagination
+          current={page}
           total={users.length}
           itemRender={itemRender}
           onChange={handlePageChange}

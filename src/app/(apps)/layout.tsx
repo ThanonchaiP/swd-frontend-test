@@ -2,6 +2,7 @@
 
 import { Provider } from "react-redux";
 
+import { HomeButton } from "@/components/home-button";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import store from "@/store/configureStore";
 
@@ -16,6 +17,7 @@ export default function AppsLayout({
     <Provider store={store}>
       <main>
         <LanguageSwitcher />
+        <HomeButton />
         {children}
       </main>
     </Provider>
